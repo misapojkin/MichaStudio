@@ -1,4 +1,4 @@
-[index.html](https://github.com/user-attachments/files/26575018/index.html)
+[index.html](https://github.com/user-attachments/files/26575540/index.html)
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -624,16 +624,14 @@ async function analyzeMusic() {
     row.appendChild(d);
   });
   document.getElementById('chordSection').classList.remove('hidden');
-  setProgress(1, 80);
-
-  await callClaude(
-    `Analisei uma música Pop/R&B e detectei: tonalidade ${key}, BPM ${bpm}, cifras: ${chords.join(', ')}. Dê 2-3 observações musicais breves e animadas sobre o que isso revela sobre a música, como um produtor parceiro. Seja criativo e entusiasmado, em português. Máximo 80 palavras.`,
-    'aiAnalysisBubble'
-  );
-
   setProgress(1, 100);
   setStatus(1, '✓ Análise completa! Próximo: Separar.', 'ok');
   document.getElementById('analyzeBtn').disabled = false;
+
+  callClaude(
+    `Analisei uma música Pop/R&B e detectei: tonalidade ${key}, BPM ${bpm}, cifras: ${chords.join(', ')}. Dê 2-3 observações musicais breves e animadas sobre o que isso revela sobre a música, como um produtor parceiro. Seja criativo e entusiasmado, em português. Máximo 80 palavras.`,
+    'aiAnalysisBubble'
+  );
 }
 
 async function separateTracks() {
@@ -683,7 +681,7 @@ async function generateBeat() {
   const tags = [...document.querySelectorAll('.tag.sel')].map(t=>t.textContent).join(', ')||'r&b moderno';
   const bpm = document.getElementById('bpmVal').textContent;
   const energy = document.getElementById('energyVal').textContent;
-  await callClaude(
+  callClaude(
     `Sou cantora Pop/R&B e quero criar um beat com: instrumentos: ${insts}, estilo: ${tags}, BPM: ${bpm}, energia: ${energy}%. Descreva o arranjo ideal para uma música pop feminina emotiva: como cada instrumento entra, o groove da bateria, o papel do baixo, a textura do synth. Seja como um produtor de verdade. Em português, máximo 120 palavras.`,
     'prodBubble'
   );
@@ -707,14 +705,14 @@ async function getVocalTips() {
   const comp = document.getElementById('compVal').textContent;
   const rev = document.getElementById('revVal').textContent;
   const pres = document.getElementById('presVal').textContent;
-  await callClaude(
+  callClaude(
     `Sou cantora Pop/R&B e estou editando meu vocal com: auto-tune ${at}%, compressão ${comp}%, reverb ${rev}%, presença ${pres}%. Me dê dicas específicas sobre essas configurações para um vocal feminino emotivo estilo R&B. O que ajustar para soar mais profissional? Em português, prático, máximo 100 palavras.`,
     'vocalBubble'
   );
 }
 
 async function getMixTips() {
-  await callClaude(
+  callClaude(
     `Estou finalizando uma música Pop/R&B para subir no Spotify via ONErpm. Alvo: -14 LUFS, WAV 44.1kHz 24bit. Me dê 3 dicas práticas de mixagem e masterização para garantir que soa profissional e alto nas plataformas. Seja direto como um engenheiro de som parceiro. Em português, máximo 100 palavras.`,
     'mixBubble'
   );
