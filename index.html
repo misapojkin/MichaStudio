@@ -727,29 +727,85 @@ function exportFinal() {
   document.getElementById('exportStatus').style.display = 'flex';
 }
 
+const respostas = {
+  analise: [
+    "Que música rica! Esse campo harmônico tem muito espaço pra melodia flutuar — perfeito para um vocal expressivo de R&B. Com esse BPM no range médio, você pode brincar com rubato nas frases longas sem perder o groove. As cifras menores dão aquela profundidade emocional que o Pop/R&B ama.",
+    "Adorei essa tonalidade! É uma das favoritas dos produtores de R&B porque soa naturalmente quente e emotiva. O BPM tá no ponto certo pra um mid-tempo — nem rápido demais, nem arrastado. Dá pra explorar muito silêncio entre as frases vocais aqui.",
+    "Essa progressão de acordes tem personalidade! Lembra muito o som do R&B brasileiro contemporâneo. Com esse andamento, o vocal consegue respirar e contar a história com calma. Sugiro explorar as notas de tensão das cifras — elas criam aquele drama lindo nas melodias.",
+    "Que combinação interessante! Essa mistura de acordes maiores e menores cria uma tensão emocional muito rica — alegria e melancolia ao mesmo tempo, que é exatamente o que faz uma música de R&B marcar as pessoas. Seu vocal vai brilhar muito nessa base."
+  ],
+  beat: {
+    'r&b moderno': [
+      "Para esse R&B moderno: começa com um kick profundo no 1 e 3, snare esfumaçado no 2 e 4. O piano entra com comping suave nas semicolcheias, respondendo ao vocal. O synth pad fica nas notas longas criando textura. Adiciona um hi-hat com swing de 60% para dar aquele groove característico. O baixo segue o kick com notas curtas e uma nota longa no final do compasso.",
+      "Esse beat pede um trap suave com alma de R&B: 808 grave e longo na raiz de cada acorde, hi-hats em padrão de 1/8 com alguns ghost notes. O piano elétrico faz arpejos simples, o synth cria um pad atmosférico. Coloca um snap no 2 e 4 pra dar aquele charme. Menos é mais aqui — deixa o vocal respirar."
+    ],
+    'pop melódico': [
+      "Para pop melódico: bateria limpa com kick no 1, snare no 2 e 4, hi-hat em colcheias regulares. Piano melódico fazendo a progressão de acordes com inversões bonitas. Strings suaves entrando no pré-refrão pra criar tensão. O synth faz um lead simples no refrão. Bass guitar com groove simples mas eficiente.",
+      "Beat pop com coração: intro só com piano e voz, bateria entra na segunda frase. Usa um shaker pra dar leveza. O refrão explode com todos os elementos juntos — bateria completa, baixo marcado, cordas e synth. Cria um drop antes do último refrão tirando tudo e deixando só a voz por um compasso."
+    ],
+    'neo soul': [
+      "Neo soul de verdade: bateria tocada com baquetas, não programada — busca samples de bateria ao vivo com muito groove. Piano Rhodes fazendo acordes cheios com extensões (7ª, 9ª, 11ª). Baixo elétrico com slap suave. Guitarra com wah fazendo licks entre as frases vocais. Adiciona percussão brasileira como pandeiro pra dar identidade.",
+      "Para neo soul: o segredo é o swing. Programa a bateria com quantização de 60-70% — não totalmente na grade. O Rhodes é rei aqui, com chorus leve. Baixo melódico que conversa com o vocal. Adiciona sopros em background no refrão. Mantém tudo orgânico e quente."
+    ],
+    'trap suave': [
+      "Trap suave feminino: 808 muito presente mas afinado na tonalidade da música. Hi-hats rápidos (1/16) com pausa dramática antes do drop. Snare pesado só no 3. Melodia de synth simples e emotiva no refrão. Piano ou Rhodes nas estrofes pra contrastar. Menos elementos = mais impacto.",
+      "Para esse trap: o silêncio é um instrumento. Usa o 808 com portamento (slide) entre as notas. Hi-hat com padrão irregular — cria ansiedade boa. Um vocal chop no background dá textura sem poluir. O refrão pode ter só o 808 e o synth, deixando o vocal ser a estrela."
+    ],
+    'default': [
+      "Para sua música: começa simples — kick, snare e um piano. Vai adicionando elementos gradualmente. No pré-refrão entra o baixo, no refrão o synth pad. Lembra: o vocal é a estrela, o beat é o apoio. Menos elementos bem colocados valem mais que muita coisa ao mesmo tempo.",
+      "Dica de ouro para produção Pop/R&B: construa o beat em camadas. Primeiro o groove (bateria + baixo), depois a harmonia (piano/synth), por último a textura (pads, strings). Cada elemento deve ter seu espaço no espectro — graves pro baixo e kick, médios pro piano, agudos pros hi-hats e brilho do synth."
+    ]
+  },
+  vocal: [
+    "Suas configurações estão ótimas! Para Pop/R&B feminino, sugiro: Auto-tune em torno de 70-75% com velocidade média — corrige sem soar artificial. A compressão em 60% equilibra bem as dinâmicas sem matar a expressão. Aumenta a presença (3-5kHz) para o vocal cortar o mix. O air EQ acima de 12kHz dá aquele brilho aéreo característico das divas do R&B.",
+    "Para um vocal feminino emotivo: usa compressão leve nas estrofes (40-50%) e mais forte no refrão (65-70%) para equilibrar a intensidade. O reverb nas estrofes pode ser maior, no refrão menor — isso cria profundidade. Delay sutil de 1/8 no tempo da música dá sensação de espaço sem bagunçar.",
+    "Dica importante: grave com o mínimo de reverb possível — adiciona na mixagem. Para afinação, velocidade lenta de Auto-tune soa mais natural em baladas, mais rápida em faixas mais dançantes. A presença vocal entre 2-5kHz é o que faz a voz 'aparecer' no mix mesmo em fones baratos.",
+    "Para soar profissional: o segredo está na dinâmica. Deixa as notas mais suaves um pouco mais suaves e as mais fortes um pouco mais fortes — não comprime tudo igual. O Air EQ acima de 10kHz dá aquele brilho das produções internacionais. E sempre, sempre, sempre: a performance emocional vale mais que qualquer plugin."
+  ],
+  mix: [
+    "Para o mix final perfeito no Spotify: vocal entre -18 e -12 LUFS na faixa, beat uns 3-4dB abaixo do vocal. O Spotify normaliza para -14 LUFS então não precisa masterizar muito alto — qualidade vale mais que volume. Usa o limitador só para picos acima de -1dBFS. Exporta em WAV 24bit antes de converter para MP3.",
+    "Checklist pro ONErpm: WAV 44.1kHz 24bit estéreo. Volume integrado entre -14 e -16 LUFS. True peak máximo de -1dBFS. Sem clipping em nenhum canal. Sem silêncio no início, 2 segundos de silêncio no final. Nome do arquivo sem caracteres especiais. Metadados preenchidos (título, artista, ISRC se tiver).",
+    "Dica de mix para R&B: o vocal precisa estar 'na frente' da música, não dentro dela. Se estiver se perdendo no mix, reduz o reverb do vocal pela metade e aumenta a presença (3kHz). O baixo e o kick precisam se encaixar — se estiver bagunçado, corta frequências do baixo onde o kick está mais forte (geralmente 80-100Hz).",
+    "Para mixagem equilibrada: ouça em fones baratos, caixa de som do computador E no celular. Se soar bem nos três, está pronto. A maioria das pessoas vai ouvir sua música no fone do celular — esse é o teste mais importante. Referencia com músicas que você ama no mesmo gênero para comparar o volume e o equilíbrio tonal."
+  ]
+};
+
+function getRespostaAnalise(key, bpm, chords) {
+  return respostas.analise[Math.floor(Math.random()*respostas.analise.length)];
+}
+
+function getRespostaBeat(tags, insts) {
+  const style = tags.includes('neo soul')?'neo soul':tags.includes('pop melódico')?'pop melódico':tags.includes('trap')?'trap suave':tags.includes('r&b')?'r&b moderno':'default';
+  const arr = respostas.beat[style]||respostas.beat['default'];
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function getRespostaVocal() {
+  return respostas.vocal[Math.floor(Math.random()*respostas.vocal.length)];
+}
+
+function getRespostaMix() {
+  return respostas.mix[Math.floor(Math.random()*respostas.mix.length)];
+}
+
 async function callClaude(prompt, bubbleId) {
   const bubble = document.getElementById(bubbleId);
   if(!bubble) return;
   bubble.style.display = 'block';
-  bubble.innerHTML = '<div class="thinking">Pensando <div class="dots"><span>.</span><span>.</span><span>.</span></div></div>';
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':'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','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:'Você é um produtor musical expert em Pop/R&B brasileiro, especializado em vocais femininos. Responda em português, de forma prática, calorosa e direta. Sem markdown, sem asteriscos.',
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    const data = await res.json();
-    const text = data.content?.map(b=>b.text||'').join('')||'Não consegui responder agora. Tente novamente.';
-    bubble.innerHTML = '';
-    await typeText(bubble, text);
-  } catch(e) {
-    bubble.textContent = 'Sem conexão com a IA. Verifique sua internet e tente novamente.';
+  bubble.innerHTML = '<div class="thinking">Analisando <div class="dots"><span>.</span><span>.</span><span>.</span></div></div>';
+  await sleep(1200 + Math.random()*800);
+  bubble.innerHTML = '';
+  let resposta = '';
+  if(bubbleId==='aiAnalysisBubble') resposta = getRespostaAnalise();
+  else if(bubbleId==='prodBubble') {
+    const tags = [...document.querySelectorAll('.tag.sel')].map(t=>t.textContent).join(' ').toLowerCase();
+    const insts = [...document.querySelectorAll('.inst-chip.sel')].map(e=>e.dataset.inst).join(', ');
+    resposta = getRespostaBeat(tags, insts);
   }
+  else if(bubbleId==='vocalBubble') resposta = getRespostaVocal();
+  else if(bubbleId==='mixBubble') resposta = getRespostaMix();
+  else resposta = respostas.analise[0];
+  await typeText(bubble, resposta);
 }
 
 async function typeText(el, text) {
